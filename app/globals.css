@@ -24,3 +24,19 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.sample1bar {
+  border: none;
+  border-top: 3px double darkslateblue;
+  overflow: visible;
+  text-align: center;
+  height: 5px;
+}
+
+.sample2bar {
+  border: none;
+  border-top: 3px double orangered;
+  overflow: visible;
+  text-align: center;
+  height: 5px;
+}

@@ -1,5 +1,14 @@
 import Link from "next/link";
 
+/**
+ * Sample2 페이지 컴포넌트
+ *
+ * 이 컴포넌트는 Sample2 페이지의 UI를 렌더링하며,
+ * 페이지 상단에 제목을 표시하고, 하단에 홈 페이지로 돌아가는 링크를 제공합니다.
+ *
+ * @component
+ * @returns {JSX.Element} Sample2 페이지의 JSX
+ */
 export default function Sample2() {
     return (
         <main className="p-8">
