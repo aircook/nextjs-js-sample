@@ -60,6 +60,9 @@ export default function Home() {
           <Link href="/sample2" className="text-blue-600 underline">
             Sample2 페이지로 이동
           </Link>
+          <Link href="/sample3" className="text-blue-600 underline">
+            Sample3 페이지로 이동
+          </Link>
         </div>
         {/* 👇 main과 footer 사이에 링크 삽입 끝 */}
       </main>
