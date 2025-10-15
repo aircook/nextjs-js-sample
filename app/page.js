@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -50,7 +51,19 @@ export default function Home() {
             Read our docs
           </a>
         </div>
+
+        {/* 👇 main과 footer 사이에 링크 삽입 시작 */}
+        <div className="my-4 flex gap-4">
+          <Link href="/sample1" className="text-blue-600 underline">
+            Sample1 페이지로 이동
+          </Link>
+          <Link href="/sample2" className="text-blue-600 underline">
+            Sample2 페이지로 이동
+          </Link>
+        </div>
+        {/* 👇 main과 footer 사이에 링크 삽입 끝 */}
       </main>
+
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
