@@ -1,4 +1,6 @@
+"use client";
 import Link from "next/link";
+import { useState } from "react";
 
 /**
  * Sample1 페이지 컴포넌트
@@ -10,9 +12,23 @@ import Link from "next/link";
  * @returns {JSX.Element} Sample1 페이지의 JSX
  */
 export default function Sample1() {
+
+    const [count, setCount] = useState(0);
+
+    const handleIncrement = () => {
+      setCount(count + 1);
+    };
+
     return (
         <main className="p-8">
             <h1 className="text-2xl font-bold">Sample1 페이지</h1>
+            <p className="text-lg mb-4">현재 카운트: {count}</p>
+            <button
+                onClick={handleIncrement}
+                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            >
+                증가
+            </button>
             <Link href="/" className="text-blue-600 underline block mt-4">
                 홈으로 돌아가기
             </Link>
