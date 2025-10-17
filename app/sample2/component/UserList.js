@@ -10,7 +10,7 @@ import {useState, useEffect, useMemo} from "react";
  *
  * @returns {JSX.Element} 데이터 테이블의 JSX
  */
-export default function DataTable() {
+export default function UserList() {
     // 전체 사용자 목록
     const [users, setUsers] = useState([]);
     // 검색어 입력값

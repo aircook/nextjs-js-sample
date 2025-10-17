@@ -1,5 +1,5 @@
 import Link from "next/link";
-import DataTable from "./component/dataTable";
+import UserList from "./component/UserList";
 
 /**
  * Sample2 페이지 컴포넌트 (서버 컴포넌트)
@@ -15,7 +15,7 @@ export default async function Sample2() {
     return (
         <main className="p-8">
             <h1 className="text-2xl font-bold">Sample2 페이지</h1>
-            <DataTable />
+            <UserList />
             <Link href="/" className="text-blue-600 underline block mt-4">
                 홈으로 돌아가기
             </Link>
