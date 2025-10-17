@@ -1,6 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 
+/**
+ * 홈 페이지 컴포넌트
+ *
+ * 이 컴포넌트는 애플리케이션의 메인 페이지를 렌더링합니다.
+ * Next.js 시작을 위한 기본 정보와 Vercel 배포 및 문서 링크를 포함합니다.
+ * 또한 샘플 페이지로 이동하는 링크를 제공합니다.
+ *
+ * @returns {JSX.Element} 홈 페이지의 JSX
+ */
 export default function Home() {
     return (
         <div

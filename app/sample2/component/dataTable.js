@@ -2,9 +2,13 @@
 import {useState, useEffect, useMemo} from "react";
 
 /**
- * 그리드 표현을 위한 클라이언트 컴포넌트
- * @param users
- * @returns {JSX.Element}
+ * 사용자 데이터 테이블 컴포넌트 (클라이언트 컴포넌트)
+ *
+ * 이 컴포넌트는 외부 API에서 사용자 데이터를 가져와 테이블 형태로 표시합니다.
+ * 사용자 목록을 검색하고 필터링하는 기능을 제공하며,
+ * 특정 사용자를 클릭하면 해당 사용자의 상세 정보를 보여줍니다.
+ *
+ * @returns {JSX.Element} 데이터 테이블의 JSX
  */
 export default function DataTable() {
     // 전체 사용자 목록

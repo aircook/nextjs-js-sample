@@ -5,10 +5,10 @@ import { useState } from "react";
 /**
  * Sample1 페이지 컴포넌트
  *
- * 이 컴포넌트는 Sample1 페이지의 UI를 렌더링하며,
- * 페이지 상단에 제목을 표시하고, 하단에 홈 페이지로 돌아가는 링크를 제공합니다.
+ * 이 컴포넌트는 Sample1 페이지의 UI를 렌더링합니다.
+ * 카운터 상태를 관리하고, 사용자가 버튼을 클릭하면 카운트를 증가시킵니다.
+ * 페이지 상단에 제목과 현재 카운트를 표시하고, 하단에 홈 페이지로 돌아가는 링크를 제공합니다.
  *
- * @component
  * @returns {JSX.Element} Sample1 페이지의 JSX
  */
 export default function Sample1() {
