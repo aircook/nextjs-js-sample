@@ -1,5 +1,6 @@
 "use client";
 import {useState, useEffect, useMemo} from "react";
+import {api, apiRequest} from "@/lib/api";
 
 /**
  * 사용자 데이터 테이블 컴포넌트 (클라이언트 컴포넌트)
@@ -21,15 +22,24 @@ export default function UserList() {
 
     // ✅ 마운트 시 API 한 번만 호출
     // 두 번째 인자로 [](빈 배열)을 넣었기 때문에, 처음 마운트될 때 한 번만 실행돼.
+    // useEffect(() => {
+    //     const loadUsers = async () => {
+    //         const res = await fetch("https://jsonplaceholder.typicode.com/users");
+    //         const data = await res.json();
+    //         // 상태저장
+    //         setUsers(data);
+    //     };
+    //     loadUsers();
+    // }, []);
     useEffect(() => {
-        const fetchData = async () => {
-            const res = await fetch("http://jsonplaceholder.typicode.com/users");
-            const data = await res.json();
+        const loadUsers  = async () => {
+            const data = await apiRequest(() => api.get("/users"));
             // 상태저장
-            setUsers(data);
+            if (data) setUsers(data);
         };
-        fetchData();
+        loadUsers();
     }, []);
+
 
     // ✅ useMemo로 필터링 최적화 (입력 바뀔 때만 재계산)
     // useMemo()는 연산 결과를 기억(Memoization) 해두는 React Hook, 값 계산 결과 캐싱
