@@ -1,4 +1,5 @@
 import {Geist, Geist_Mono} from "next/font/google";
+import {ApiProvider} from "@/context/ApiProvider";
 import "@/style/globals.css";
 
 const geistSans = Geist({
@@ -32,7 +33,10 @@ export default function RootLayout({children}) {
         <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-        {children}
+        {/* ✅ 모든 페이지를 ApiProvider로 감쌈 */}
+        <ApiProvider>
+            {children}
+        </ApiProvider>
         </body>
         </html>
     );
