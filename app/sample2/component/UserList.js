@@ -1,6 +1,7 @@
 "use client";
 import {useState, useEffect, useMemo} from "react";
-import {api, apiRequest} from "@/lib/api";
+import apiClient from "@/lib/apiClient";
+import apiRequest from "@/lib/apiRequest";
 
 /**
  * 사용자 데이터 테이블 컴포넌트 (클라이언트 컴포넌트)
@@ -33,7 +34,7 @@ export default function UserList() {
     // }, []);
     useEffect(() => {
         const loadUsers  = async () => {
-            const data = await apiRequest(() => api.get("/users"));
+            const data = await apiRequest(() => apiClient.get("/users"));
             // 상태저장
             if (data) setUsers(data);
         };

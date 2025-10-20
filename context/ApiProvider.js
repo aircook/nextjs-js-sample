@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { useApiStore } from "@/store/useApiStore";
 import { AlertMessage } from "@/component/AlertMessage";
@@ -16,6 +16,7 @@ export function ApiProvider({ children }) {
     const { loading, error, clearError } = useApiStore();
 
     return (
+        /*<></> --> <React.Fragment></React.Fragment> 의 축약형*/
         <>
             {children} {/* 실제 페이지나 컴포넌트들을 감싸는 부분 */}
             {loading && <LoadingSpinner />} {/* 로딩 중일 때 스피너 표시 */}
