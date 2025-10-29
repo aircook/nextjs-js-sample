@@ -81,6 +81,11 @@ export default function Home() {
                                 Sample3 페이지로 이동
                             </Link>
                         </li>
+                        <li>
+                            <Link href="/sample4" className="text-blue-600 underline">
+                                Sample4 페이지로 이동
+                            </Link>
+                        </li>
                     </ol>
                 </div>
                 {/* 👇 main과 footer 사이에 링크 삽입 끝 */}
