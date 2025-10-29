@@ -6,46 +6,60 @@ import { Client } from "@stomp/stompjs";
 
 /**
  * WebSocket 채팅 컴포넌트
- *
- * Spring Boot WebSocket 서버와 STOMP 프로토콜을 통해 실시간 채팅을 구현합니다.
  */
 export default function WebSocket() {
-    const [messages, setMessages] = useState([]); // 받은 메시지 목록
-    const [input, setInput] = useState(""); // 입력값
-    const [stompClient, setStompClient] = useState(null); // STOMP 클라이언트 저장
+    const [messages, setMessages] = useState([]);
+    const [input, setInput] = useState("");
+    const [stompClient, setStompClient] = useState(null);
+    const [clientId, setClientId] = useState("");
+
+    const generateRandomId = () => {
+        const id = "User-" + Math.random().toString(36).substring(2, 8);
+        setClientId(id);
+    };
+
+    // 시간 포맷 함수
+    const formatTime = (timestamp) => {
+        if (!timestamp) return "";
+        const date = new Date(timestamp);
+        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    };
 
     useEffect(() => {
-        // SockJS 연결 생성 (백엔드: localhost:8080/ws)
-        const socket = new SockJS("http://localhost:8080/ws");
+        generateRandomId();
 
-        // STOMP 클라이언트 설정
+        const socket = new SockJS("http://localhost:8080/ws");
         const client = new Client({
             webSocketFactory: () => socket,
             debug: (str) => console.log(str),
             onConnect: () => {
-                // 연결 후 구독
                 client.subscribe("/topic/messages", (msg) => {
-                    setMessages((prev) => [...prev, msg.body]);
+                    try {
+                        const parsed = JSON.parse(msg.body);
+                        setMessages((prev) => [...prev, parsed]);
+                    } catch {
+                        setMessages((prev) => [...prev, { sender: "Server", message: msg.body, timestamp: new Date().toISOString() }]);
+                    }
                 });
             },
         });
 
         client.activate();
         setStompClient(client);
-
-        // 언마운트 시 연결 종료
         return () => client.deactivate();
     }, []);
 
-    // 메시지 전송
     const sendMessage = () => {
         if (stompClient && input.trim() !== "") {
-            stompClient.publish({ destination: "/app/chat", body: input });
+            const payload = JSON.stringify({
+                sender: clientId,
+                message: input
+            });
+            stompClient.publish({ destination: "/app/chat", body: payload });
             setInput("");
         }
     };
 
-    // Enter 키 입력 시 메시지 전송
     const handleKeyDown = (e) => {
         if (e.key === "Enter") {
             e.preventDefault();
@@ -55,11 +69,11 @@ export default function WebSocket() {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4">
-            {/* ✅ 넓이를 더 키운 채팅창 */}
             <div className="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-6">
-                <h1 className="text-2xl font-semibold text-gray-800 mb-4 text-center">
-                    💬 WebSocket Chat
-                </h1>
+                <h1 className="text-2xl font-semibold text-gray-800 mb-4 text-center">💬 WebSocket Chat</h1>
+                <p className="text-center text-gray-500 mb-4">
+                    You are <span className="font-semibold text-blue-600">{clientId}</span>
+                </p>
 
                 {/* 메시지 표시 영역 */}
                 <div className="h-80 overflow-y-auto border border-gray-200 rounded-lg p-3 mb-4 bg-gray-50">
@@ -69,20 +83,27 @@ export default function WebSocket() {
                         messages.map((msg, idx) => (
                             <div
                                 key={idx}
-                                className="bg-blue-100 text-blue-800 px-3 py-2 rounded-xl mb-2 w-fit max-w-[80%]"
+                                className={`px-3 py-2 rounded-xl mb-2 max-w-[80%] ${
+                                    msg.sender === clientId
+                                        ? "bg-blue-500 text-white self-end ml-auto"
+                                        : "bg-gray-200 text-gray-800"
+                                }`}
                             >
-                                {msg}
+                <span className="block text-sm font-semibold">
+                  {msg.sender === clientId ? "You" : msg.sender}{" "}
+                    <span className="text-xs text-gray-500 ml-2">{formatTime(msg.timestamp)}</span>
+                </span>
+                                <span>{msg.message}</span>
                             </div>
                         ))
                     )}
                 </div>
 
-                {/* 입력창 + 전송버튼 */}
                 <div className="flex space-x-2">
                     <input
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
-                        onKeyDown={handleKeyDown} // ✅ 엔터 입력 처리
+                        onKeyDown={handleKeyDown}
                         placeholder="Type a message..."
                         className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                     />
