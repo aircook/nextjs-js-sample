@@ -19,6 +19,11 @@ export default function WebSocket() {
     };
 
     // 시간 포맷 함수
+    /**
+     * 타임스탬프를 시간 형식의 문자열로 변환합니다.
+     * @param {number|string|Date} timestamp - 변환할 타임스탬프 (밀리초 단위)
+     * @returns {string} HH:MM:SS 형식의 시간 문자열. 타임스탬프가 없으면 빈 문자열 반환
+     */
     const formatTime = (timestamp) => {
         if (!timestamp) return "";
         const date = new Date(timestamp);
