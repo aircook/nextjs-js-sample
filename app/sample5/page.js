@@ -1,10 +1,21 @@
+/**
+ * Sample5
+ *
+ * Client-side React component that renders a simple page section with:
+ * - a main container with padding
+ * - a heading ("Sample5")
+ * - a greeting paragraph ("Hello World")
+ * - a link that navigates back to the home page ("홈으로 돌아가기")
+ *
+ * 클라이언트 사이드 컴포넌트로, 제목과 간단한 인사 문구 및 홈으로 돌아가는 링크를 렌더링합니다.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered Sample5 component (a <main> element containing heading, paragraph, and a Link).
+ */
 "use client";
 import Link from "next/link";
 
-/**
- * Sample5 페이지
- * 단순히 Hello World를 렌더링합니다.
- */
+
 export default function Sample5() {
     return (
         <main className="p-8">
